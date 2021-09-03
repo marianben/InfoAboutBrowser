@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Information</title>
+</head>
+<body bgcolor="#ffe4c4">
+<table border="1">
+    <tr>
+        <th bgcolor="#ff7f50">Attribute</th>
+        <th bgcolor="#ff7f50">Result</th>
+        <th bgcolor="#ff7f50">Description</th>
+    </tr>
+    <tr>
+        <td>Time Zone</td>
+        <td>
+            <span id="timeZone"></span>
+        </td>
+        <td> We get the day, date, year, hour and time zone</td>
+    </tr>
+
+    <tr>
+        <td>Language</td>
+        <td>
+            <span id="language" (text)="showLanguage()"></span>
+        </td>
+        <td> The user`s browser interface  language is displayed</td>
+    </tr>
+
+    <tr>
+        <td>Cookies</td>
+        <td>
+            <span id="cookie" (text)="showLanguage()"></span>
+        </td>
+        <td>Checks the inclusion of cookies on the browser from which the login was on</td>
+    </tr>
+
+    <tr>
+        <td>Version</td>
+        <td>
+            <span id="version" (text)="showLanguage()"></span>
+        </td>
+        <td>Displays the browser version (but can be encoded)</td>
+    </tr>
+
+    <tr>
+        <td>Width</td>
+        <td>
+            <span id="width" (text)="showLanguage()"></span>
+        </td>
+        <td>This is the size of the open browser window you are using (it is displayed in pixel)</td>
+    </tr>
+    <tr>
+        <td>Location</td>
+        <td>
+            <span id="location" (text)="showLanguage()"></span>
+        </td>
+        <td>The user location who using the browser is displayed (displayed as latitude and longitude)</td>
+    </tr>
+</table>
+
+<p style="color:#ff0000" align="center">All these attributes are present in any browser.Their quantity is been changing from time to time.</p>
+
+<script>
+
+    showLanguage();
+    showCookies();
+    versionBrowser();
+    width();
+    getLocation();
+    timeZone();
+
+    function timeZone() {
+        document.getElementById('timeZone').innerHTML = Date();
+    }
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+
+        } else {
+            var errorMessage = "The browser does not support geolocation.";
+        }
+    }
+
+    function showPosition(position) {
+        var coordinate = "Latitude: " + position.coords.latitude +
+            "<br>Longitude: " + position.coords.longitude;
+        document.getElementById('location').innerHTML = coordinate;
+    }
+
+    function showLanguage() {
+        var userLang = navigator.language;
+        document.getElementById('language').innerHTML = userLang;
+        console.log(userLang);
+    }
+
+    function showCookies() {
+        var cookie = navigator.cookieEnabled;
+        document.getElementById('cookie').innerHTML = cookie;
+        console.log(cookie);
+    }
+
+    function versionBrowser() {
+        var vers = navigator.appVersion;
+        document.getElementById('version').innerHTML = vers;
+    }
+
+    function width() {
+        var widthDevise = document.body.clientWidth;
+        document.getElementById('width').innerHTML = widthDevise + "px";
+    }
+</script>
+</body>
+</html>
